@@ -4,13 +4,13 @@ import 'package:meuapp/shared/theme/app_theme.dart';
 
 enum ButtonType { fill, outline, none }
 
-class ButtonElevated extends StatelessWidget {
-  final Function() onPressed;
+class Button extends StatelessWidget {
+  final Function() onTap;
   final String label;
   final ButtonType type;
-  const ButtonElevated({
+  const Button({
     Key? key,
-    required this.onPressed,
+    required this.onTap,
     required this.label,
     required this.type,
   }) : super(key: key);
@@ -52,7 +52,7 @@ class ButtonElevated extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPressed,
+      onTap: onTap,
       child: Container(
         decoration: boxDecoration,
         height: 58,
