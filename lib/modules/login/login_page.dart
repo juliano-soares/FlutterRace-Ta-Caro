@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:meuapp/modules/login/login_controller.dart';
+import 'package:meuapp/modules/login/repositories/login_repository_impl.dart';
+import 'package:meuapp/shared/services/app_database.dart';
 
 import 'package:meuapp/shared/theme/app_theme.dart';
-import 'package:meuapp/shared/utils/state.dart';
+import 'package:meuapp/shared/utils/app_state.dart';
 import 'package:meuapp/shared/widgets/button/button.dart';
 import 'package:meuapp/shared/widgets/input_text/input_text.dart';
 import 'package:validators/validators.dart';
@@ -15,14 +17,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final controller = LoginController();
+  late final LoginController controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
+    controller = LoginController(
+      repository: LoginRepositoryImpl(database: AppDatabase.instance),
+    );
     controller.addListener(() {
       controller.state.when(
-          success: (value) => Navigator.pushNamed(context, "/home"),
+          success: (value) =>
+              Navigator.pushNamed(context, "/home", arguments: value),
           error: (message, _) => scaffoldKey.currentState!
               .showBottomSheet((context) => BottomSheet(
                   onClosing: () {},
@@ -89,7 +95,6 @@ class _LoginPageState extends State<LoginPage> {
                               onTap: () {
                                 controller.login();
                               },
-                              type: ButtonType.fill,
                             ),
                             SizedBox(
                               height: 50,

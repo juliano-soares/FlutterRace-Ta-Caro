@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
-
-import 'package:meuapp/modules/login/repositories/login_repository.dart';
-import 'package:meuapp/shared/models/user_model.dart';
+import 'package:meuapp/modules/create/repositories/create_repository.dart';
 import 'package:meuapp/shared/utils/app_state.dart';
 
-class CreateAccountController extends ChangeNotifier {
-  final LoginRepository repository;
+class CreateController extends ChangeNotifier {
+  final ICreateRepository repository;
   AppState state = AppState.empty();
 
   final formKey = GlobalKey<FormState>();
-  String _email = "";
-  String _password = "";
   String _name = "";
-  CreateAccountController({
-    required this.repository,
-  });
+  String _price = "";
+  String _date = "";
+  CreateController({required this.repository});
 
-  void onChange({String? email, String? password, String? name}) {
-    _email = email ?? _email;
-    _password = password ?? _password;
+  void onChange({String? name, String? price, String? date}) {
     _name = name ?? _name;
+    _price = price ?? _price;
+    _date = date ?? _date;
   }
 
   void update(AppState state) {
@@ -40,9 +36,13 @@ class CreateAccountController extends ChangeNotifier {
     if (validate()) {
       try {
         update(AppState.loading());
-        final response = await repository.createAccount(
-            name: _name, email: _email, password: _password);
-        update(AppState.success<UserModel>(response));
+        final response =
+            await repository.create(name: _name, date: _date, price: _price);
+        if (response) {
+          update(AppState.success<bool>(response));
+        } else {
+          throw Exception("Não foi possível cadastrar");
+        }
       } catch (e) {
         update(AppState.error(e.toString()));
       }

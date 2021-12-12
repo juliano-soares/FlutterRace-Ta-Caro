@@ -4,11 +4,11 @@ import 'app_text_styles.dart';
 export 'app_text.dart';
 
 class AppTheme {
-  static final instance = AppTheme();
+  static final AppTheme instance = AppTheme();
 
   final _colors = AppColors();
-  static IAppColors get colors => instance._colors;
+  static AppColors get colors => instance._colors;
 
-  final _textStyles = AppTextStyle();
-  static IAppTextStyle get textStyles => instance._textStyles;
+  final _textStyles = AppTextStyles();
+  static AppTextStyles get textStyles => instance._textStyles;
 }

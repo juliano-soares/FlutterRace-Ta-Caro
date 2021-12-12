@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-
 import 'package:meuapp/shared/theme/app_theme.dart';
 
 enum ButtonType { fill, outline, none }
 
 class Button extends StatelessWidget {
-  final Function() onTap;
   final String label;
   final ButtonType type;
+  final Function() onTap;
   const Button({
     Key? key,
-    required this.onTap,
     required this.label,
-    required this.type,
+    required this.onTap,
+    this.type = ButtonType.fill,
   }) : super(key: key);
 
   TextStyle get textStyle {
@@ -54,15 +53,14 @@ class Button extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        decoration: boxDecoration,
         height: 58,
         width: double.maxFinite,
+        decoration: boxDecoration,
         child: Center(
-          child: Text(
-            label,
-            style: textStyle,
-          ),
-        ),
+            child: Text(
+          label,
+          style: textStyle,
+        )),
       ),
     );
   }
