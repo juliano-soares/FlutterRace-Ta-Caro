@@ -3,8 +3,8 @@ import 'package:meuapp/shared/theme/app_theme.dart';
 import 'package:meuapp/shared/widgets/button/button.dart';
 import 'package:meuapp/shared/widgets/input_text/input_text.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class CreateAccountPage extends StatelessWidget {
+  const CreateAccountPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,29 +14,27 @@ class LoginPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              "assets/images/logo.png",
-              width: 200,
+            Text("Criando uma conta"),
+            Text("Mantenha seus gastos em dia"),
+            InputText(label: "Nome", hint: "Digite seu nome"),
+            SizedBox(
+              height: 12,
             ),
             InputText(label: "E-mail", hint: "Digite seu email"),
             SizedBox(
               height: 12,
             ),
             InputText(label: "Senha", hint: "Digite sua senha"),
-            ButtonElevated(
-              label: "Entrar",
-              type: ButtonType.fill,
-              onPressed: () {},
-            ),
             SizedBox(
-              height: 50,
+              height: 12,
             ),
             ButtonElevated(
               label: "Criar conta",
-              type: ButtonType.outline,
               onPressed: () {},
-            )
+              type: ButtonType.outline,
+            ),
           ],
         ),
       ),

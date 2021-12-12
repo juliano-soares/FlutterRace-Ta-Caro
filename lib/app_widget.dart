@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meuapp/modules/login/login_page.dart';
+import 'package:meuapp/modules/login/pages/create_account/create_account_page.dart';
 
 import 'modules/splash/splash_page.dart';
 
@@ -17,7 +18,7 @@ class AppWidget extends StatelessWidget {
       routes: {
         "/splash": (context) => SplashPage(),
         "/login": (context) => LoginPage(),
-        // "/login/create-account": (context) => CreateAccountPage(),
+        "/login/create-account": (context) => CreateAccountPage(),
         // "/home": (context) => HomePage()
       },
     );
